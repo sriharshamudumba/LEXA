@@ -1,0 +1,2 @@
+Python is a high-level programming language. The 'with open()' statement automatically manages file closing.
+
