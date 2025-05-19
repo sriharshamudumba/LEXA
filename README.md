@@ -37,18 +37,14 @@ Edit
 git clone https://github.com/your-username/LEXA.git
 cd LEXA
 2. Set up the virtual environment
-bash
-Copy
-Edit
+
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
 3. Add your documents
 Place .txt files in:
 
-bash
-Copy
-Edit
 data/documents/
 4. Start the API server
 bash
@@ -56,12 +52,7 @@ Copy
 Edit
 uvicorn backend.app:app --reload --port 8000
 5. Test the endpoints
-Go to:
-
-arduino
-Copy
-Edit
-http://127.0.0.1:8000/docs
+Go to: http://127.0.0.1:8000/docs
 /ask → for document-grounded queries
 
 /generate → for pure LLM generation (no documents)
