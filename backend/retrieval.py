@@ -43,8 +43,11 @@ class DocumentRetriever:
         """
         query_embedding = self.embedding_model.encode([query], convert_to_numpy=True)
         distances, indices = self.index.search(query_embedding, top_k)
-        retrieved_docs = [self.documents[i] for i in indices[0]]
-        return "\n\n".join(retrieved_docs)
+        # Create a list of (document, score) tuples
+        retrieved_docs_with_scores = []
+        for i, doc_index in enumerate(indices[0]):
+            retrieved_docs_with_scores.append((self.documents[doc_index], distances[0][i]))
+        return retrieved_docs_with_scores
 
 
 # Initialize once at server start
@@ -54,5 +57,6 @@ retriever.embed_documents()
 retriever.build_faiss_index()
 
 # This function is imported in app.py
-def retrieve_documents(query: str) -> str:
+def retrieve_documents(query: str) -> list[tuple[str, float]]:
+    # Now returns a list of (document, score) tuples
     return retriever.retrieve(query)
